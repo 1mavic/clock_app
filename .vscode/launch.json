@@ -1,0 +1,11 @@
+{
+    "version": "1.0.0",
+    "configurations": [
+        {
+            "name": "clock_app",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+        }
+    ]
+}
