@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 /// Application theme data
 class ClockAppTheme {
   /// Get default theme
-  static ThemeData get defaultTheme => ThemeData();
+  static CupertinoThemeData get defaultTheme => const CupertinoThemeData();
 }

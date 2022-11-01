@@ -47,21 +47,21 @@ class ClockPainter extends CustomPainter {
       ..drawArc(
         rect.deflate(strokeWidth / 2),
         start,
-        hoursEnd,
+        hoursEnd != 0 ? hoursEnd : pi / 360,
         false,
         timePainter..color = Colors.red,
       )
       ..drawArc(
         rect.deflate(strokeWidth * 1.5),
         start,
-        minutesEnd,
+        minutesEnd != 0 ? minutesEnd : pi / 360,
         false,
         timePainter..color = Colors.green,
       )
       ..drawArc(
         rect.deflate(strokeWidth * 2.5),
         start,
-        secondsEnd,
+        secondsEnd != 0 ? secondsEnd : pi / 360,
         false,
         timePainter..color = Colors.amber,
       );

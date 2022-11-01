@@ -1,6 +1,7 @@
+import 'package:clock_app/app_settings/app_settings.dart';
 import 'package:clock_app/config/theme/app_theme.dart';
 import 'package:custom_clock/custom_clock.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return CupertinoApp(
       title: 'Flutter Demo',
       theme: ClockAppTheme.defaultTheme,
       home: const MainScreen(),
@@ -36,22 +37,29 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(''),
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        trailing: CupertinoButton(
+          padding: const EdgeInsets.all(5),
+          onPressed: () {
+            Navigator.of(context).push(
+              CupertinoPageRoute(
+                builder: (context) => const SettingsScreen(),
+              ),
+            );
+          },
+          child: const Icon(
+            CupertinoIcons.settings,
+          ),
+        ),
       ),
-      body: Center(
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
             ClockWidget(),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
