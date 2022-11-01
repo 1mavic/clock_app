@@ -1,12 +1,8 @@
 library color_picker;
 
-import 'dart:developer';
-
 import 'package:color_picker/models/picked_color.dart';
 import 'package:color_picker/ui/ui.dart';
 import 'package:flutter/material.dart';
-
-import 'models/picker_position.dart';
 
 /// Color Picker Widget. Shows color gradient circle with saturation
 ///  and lightness sliders. In callback returns picked Color.
@@ -35,15 +31,15 @@ class _PickerWidgetState extends State<PickerWidget> {
     super.initState();
   }
 
-  void changeColor(double? saturation, double? lightness) {
+  void changeColor(double? hue, double? saturation, double? lightness) {
     setState(() {
       pickedColor = pickedColor.copyWith(
         saturation: saturation,
         lightness: lightness,
-        hue: 0,
+        hue: hue,
       );
     });
-    log(pickedColor.toString());
+    widget.onColorChange(pickedColor.toColor);
   }
 
   @override
@@ -52,23 +48,26 @@ class _PickerWidgetState extends State<PickerWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        ColorPickerWidget(
-          saturation: pickedColor.saturation,
-          lightness: pickedColor.lightness,
-          position: pickedColor.position,
-          onPositionChange: (PickerPosition newPosition) {
-            setState(() {
-              pickedColor = pickedColor.copyWith(position: newPosition);
-            });
-          },
-        ),
         const SizedBox(
           height: 10,
+        ),
+        ColorSlider(
+          saturation: pickedColor.saturation,
+          lightness: pickedColor.lightness,
+          pickerColor: pickedColor.pickerColor,
+          onChange: (double newHue) {
+            changeColor(
+              newHue,
+              null,
+              null,
+            );
+          },
         ),
         SliderWidget(
           value: pickedColor.saturation,
           onChange: (double newSaturation) {
             changeColor(
+              null,
               newSaturation,
               null,
             );
@@ -78,6 +77,7 @@ class _PickerWidgetState extends State<PickerWidget> {
           value: pickedColor.lightness,
           onChange: (double newLightness) {
             changeColor(
+              null,
               null,
               newLightness,
             );

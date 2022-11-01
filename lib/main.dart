@@ -43,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
           padding: const EdgeInsets.all(5),
           onPressed: () {
             Navigator.of(context).push(
-              CupertinoPageRoute(
+              CupertinoPageRoute<dynamic>(
                 builder: (context) => const SettingsScreen(),
               ),
             );

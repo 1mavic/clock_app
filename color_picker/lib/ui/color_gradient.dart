@@ -16,8 +16,6 @@ class GradientPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final radius = size.width / 2;
-
     //List of colors for gradient
     final colors = List.generate(
       360,
@@ -30,7 +28,7 @@ class GradientPainter extends CustomPainter {
     );
 
     final rect = Rect.fromCenter(
-      center: Offset(radius, radius),
+      center: Offset(size.width / 2, 10),
       width: size.width,
       height: 20,
     );

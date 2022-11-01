@@ -29,11 +29,11 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  color_picker: 
+    path: ./color_picker
   cupertino_icons: ^1.0.2
   custom_clock: 
     path: ./custom_clock
-  color_picker: 
-    path: ./color_picker
   flutter:
     sdk: flutter
   intl: ^0.17.0

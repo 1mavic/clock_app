@@ -1,4 +1,3 @@
-import 'package:color_picker/models/picker_position.dart';
 import 'package:flutter/material.dart';
 
 /// Picked Color model class
@@ -6,7 +5,6 @@ import 'package:flutter/material.dart';
 class PickedColor {
   /// class constructor
   const PickedColor(
-    this._position,
     this._saturation,
     this._lightness,
     this._hue,
@@ -14,8 +12,7 @@ class PickedColor {
 
   /// cinsructor form initiating without start color
   const PickedColor.start()
-      : _position = null,
-        _hue = 0,
+      : _hue = 0,
         _saturation = 1,
         _lightness = 0.5;
 
@@ -26,15 +23,11 @@ class PickedColor {
     }
     final hslColor = HSLColor.fromColor(initialColor);
     return PickedColor(
-      PickerPosition(x: 0, y: 0),
-      hslColor.hue,
       hslColor.saturation,
       hslColor.lightness,
+      hslColor.hue,
     );
   }
-
-  /// coordinates of picked color
-  final PickerPosition? _position;
 
   /// current saturation value
   final double _saturation;
@@ -54,15 +47,20 @@ class PickedColor {
   /// get hue value
   double get hue => _hue;
 
-  /// get hue value
-  PickerPosition? get position => _position;
-
   /// get current color in RGB
-  Color get rgb => HSLColor.fromAHSL(
+  Color get toColor => HSLColor.fromAHSL(
         1,
         _hue,
         _saturation,
         _lightness,
+      ).toColor();
+
+  /// get color for picker
+  Color get pickerColor => HSLColor.fromAHSL(
+        1,
+        _hue > 320 ? hue - 360 + 40 : hue + 40,
+        1,
+        0.5,
       ).toColor();
 
   /// get current color in HSL
@@ -75,13 +73,11 @@ class PickedColor {
 
   /// copy with
   PickedColor copyWith({
-    PickerPosition? position,
     double? saturation,
     double? lightness,
     double? hue,
   }) {
     return PickedColor(
-      position ?? _position,
       saturation ?? _saturation,
       lightness ?? _lightness,
       hue ?? _hue,
@@ -90,7 +86,7 @@ class PickedColor {
 
   @override
   String toString() {
-    return 'PickedColor(_position: $_position, _saturation: $_saturation, _lightness: $_lightness, _hue: $_hue)';
+    return '''PickedColor(_saturation: $_saturation, _lightness: $_lightness, _hue: $_hue)''';
   }
 
   @override
@@ -98,7 +94,6 @@ class PickedColor {
     if (identical(this, other)) return true;
 
     return other is PickedColor &&
-        other._position == _position &&
         other._saturation == _saturation &&
         other._lightness == _lightness &&
         other._hue == _hue;
@@ -106,9 +101,6 @@ class PickedColor {
 
   @override
   int get hashCode {
-    return _position.hashCode ^
-        _saturation.hashCode ^
-        _lightness.hashCode ^
-        _hue.hashCode;
+    return _saturation.hashCode ^ _lightness.hashCode ^ _hue.hashCode;
   }
 }
