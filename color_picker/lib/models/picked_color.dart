@@ -17,7 +17,7 @@ class PickedColor {
         _lightness = 0.5;
 
   /// factory constructor from initial coor
-  factory PickedColor.fromInitial(Color? initialColor) {
+  factory PickedColor.fromInitial([Color? initialColor]) {
     if (initialColor == null) {
       return const PickedColor.start();
     }
