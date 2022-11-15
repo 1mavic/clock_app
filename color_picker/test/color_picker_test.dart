@@ -16,6 +16,19 @@ void main() {
     });
   });
 
+  group('Picked color start constructor test', () {
+    const pickedColor = PickedColor.start();
+    test('Picked color from start constructor must be red', () {
+      expect(pickedColor.hue, 0);
+    });
+    test('Picked color from start constructor must have saturation 1', () {
+      expect(pickedColor.saturation, 1);
+    });
+    test('Picked color from start constructor must have lightness 0.5', () {
+      expect(pickedColor.lightness, 0.5);
+    });
+  });
+
   group('Picked color from white', () {
     final pickedColor = PickedColor.fromInitial(Colors.white);
     test('Picked color from white hue must be 0', () {
